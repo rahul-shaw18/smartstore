@@ -1,5 +1,5 @@
 import { Injectable, signal } from '@angular/core';
-import { LoginResponce } from '../../feature/authentication/types/authentication';
+import { LoginResponce } from '../../feature/authentication/types/authentication-types';
 @Injectable({
   providedIn: 'root',
 })

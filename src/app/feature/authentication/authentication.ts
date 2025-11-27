@@ -8,7 +8,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { Api } from '../../core/services/api';
 import { Auth } from '../../core/services/auth';
-import { LoginForm } from './types/authentication';
+import { LoginForm } from './types/authentication-types';
 
 @Component({
   selector: 'app-authentication',
@@ -23,9 +23,10 @@ import { LoginForm } from './types/authentication';
   templateUrl: './authentication.html',
 })
 export class Authentication {
-  private api = inject(Api);
-  private auth = inject(Auth);
-  private router = inject(Router);
+  private readonly api = inject(Api);
+  private readonly auth = inject(Auth);
+  private readonly router = inject(Router);
+  protected responceError = signal<string | null>(null);
 
   protected loginModel = signal<LoginForm>({
     username: 'emilys',
@@ -38,23 +39,26 @@ export class Authentication {
     required(schemaPath.password, { message: 'Password is required' });
   });
 
-  onLogin() {
-    console.log(this.loginForm.username().value());
+  protected onLogin() {
     this.api.login(this.loginForm.username().value(), this.loginForm.password().value()).subscribe({
       next: (res) => {
         this.auth.login(res);
         this.router.navigate(['/']);
       },
-      error: (err) => {
-        console.log(err);
+      error: (errorRes) => {
+        this.responceError.set(errorRes.error.message);
       },
     });
   }
 
-  onClear() {
+  protected onClear() {
     this.loginModel.set({
       username: 'emilys',
       password: 'emilyspass',
     });
+  }
+
+  protected handleInput() {
+    this.responceError.set(null);
   }
 }
