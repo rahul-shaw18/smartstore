@@ -1,0 +1,63 @@
+<div class="flex items-center justify-center h-full relative">
+  <img
+    class="absolute w-full h-full"
+    src="https://static.vecteezy.com/system/resources/previews/048/966/074/large_2x/online-shopping-digital-marketing-technology-icon-on-world-map-futuristic-digital-innovation-background-e-commerce-concept-vector.jpg"
+    alt="Photo of a Shiba Inu"
+  />
+
+  <mat-card class="w-1/2 flex gap-6 p-8 bg-white/50! backdrop-blur-xs" appearance="raised">
+    <mat-card-header class="mb-8">
+      <mat-card-title class="">Login</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <div class="flex flex-col gap-6">
+        <mat-form-field appearance="outline">
+          <mat-label>Username</mat-label>
+          <input
+            matInput
+            type="text"
+            [field]="loginForm.username"
+            (input)="handleInput()"
+          />
+          <mat-icon matSuffix>account_circle</mat-icon>
+          @if(loginForm.username().touched()) {
+          <mat-error>
+            @for(error of loginForm.username().errors(); track error){
+            {{ error.message }}
+            } </mat-error
+          >}
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Password</mat-label>
+          <input
+            matInput
+            type="password"
+            [field]="loginForm.password"
+            (input)="handleInput()"
+          />
+          <mat-icon matSuffix>visibility_off</mat-icon>
+          @if(loginForm.password().touched() && loginForm.password().dirty()) {
+          <mat-error>
+            @for(error of loginForm.password().errors(); track error){
+            {{ error.message }}
+            } </mat-error
+          >}
+        </mat-form-field>
+      </div>
+    </mat-card-content>
+    @if(responceError()) {
+    <mat-error class="px-4">{{ responceError() }}</mat-error
+    >}
+    <mat-card-actions class="flex justify-end gap-4">
+      <button
+        matButton="filled"
+        (click)="onLogin()"
+        [disabled]="!loginForm.username().value() || !loginForm.password().value()"
+      >
+        Login
+      </button>
+      <button matButton="outlined" (click)="onClear()">Clear</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
