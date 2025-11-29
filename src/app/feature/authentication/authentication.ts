@@ -8,7 +8,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { Api } from '../../core/services/api';
 import { Auth } from '../../core/services/auth';
-import { LoginForm } from './types/authentication-types';
+import { LoginForm } from '../../shared/types/authentication-types';
 
 @Component({
   selector: 'app-authentication',

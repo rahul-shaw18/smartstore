@@ -3,7 +3,8 @@ import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment.development';
 import { login } from '../constants/constants';
-import { LoginResponce } from '../../feature/authentication/types/authentication-types';
+import { LoginResponce } from '../../shared/types/authentication-types';
+import { User } from '../../shared/types/user-types';
 
 @Injectable({
   providedIn: 'root',
@@ -16,5 +17,9 @@ export class Api {
       username: username,
       password: password,
     });
+  }
+
+  public currentUser(): Observable<User> {
+    return this.http.get<User>(`${environment.BASE_URL}/auth/me`);
   }
 }
