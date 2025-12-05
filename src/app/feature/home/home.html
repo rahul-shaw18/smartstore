@@ -1,1 +1,39 @@
-<p>home works!</p>
+<mat-drawer-container class="h-full relative!" autosize>
+  <mat-drawer #drawer mode="side" class="w-40" opened>
+    <app-sidenav
+      [currentUser]="currentUserDetails()"
+      [product]="products()"
+      [categories]="categories()"
+      [brands]="brands()"
+      [minPriceOfProduct]="minPriceOfProduct()"
+      [maxPriceOfProduct]="maxPriceOfProduct()"
+    />
+  </mat-drawer>
+
+  <button type="button" matMiniFab class="absolute! top-12 -left-3 z-50" (click)="drawer.toggle()">
+    <mat-icon>{{ drawer.opened ? 'chevron_left' : 'chevron_right' }}</mat-icon>
+  </button>
+  <div class="flex flex-wrap gap-8 pl-14 pt-14 overflow-scroll">
+    @for(product of products(); track product.id) {
+    <mat-card class="shadow-none!" appearance="raised">
+      <mat-card-content>
+        <img mat-card-image [src]="product.thumbnail" alt="" />
+      </mat-card-content>
+      <mat-card-footer class="p-4">
+        <p class="text-lg font-bold">{{ product.title }}</p>
+        <div><b>Brand:</b> {{ product.brand }}</div>
+        <div class="flex gap-2">
+          <b>Price:</b> <span class="line-through">${{ product.price }}</span>
+          <span
+            >${{
+              (product.price - product.price * (product.discountPercentage / 100)).toFixed(2)
+            }}</span
+          >
+        </div>
+        <div><b>Rating:</b> {{ product.rating }}/5</div>
+        <div><b>Stock Left:</b> {{ product.stock }}</div>
+      </mat-card-footer>
+    </mat-card>
+    }
+  </div>
+</mat-drawer-container>

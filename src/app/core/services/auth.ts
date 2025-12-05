@@ -44,10 +44,7 @@ export class Auth {
           accessToken: res.accessToken,
           refreshToken: res.refreshToken,
         };
-        const json = JSON.stringify(updated);
-        localStorage.setItem('user', json);
-        this.userSignal.set(json);
-        this.isLoggedIn.set(true);
+        this.login(updated)
       }),
       map((res: RefreshTokenResponce) => res.accessToken)
     );
