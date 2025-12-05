@@ -1,0 +1,63 @@
+<mat-card class="shadow-none!" appearance="raised">
+  <mat-card-header class="">
+    <img mat-card-avatar [srcset]="currentUser()?.image" class="w-10 h-10" />
+    <div>
+      <mat-card-title
+        [textContent]="currentUser()?.firstName + ' ' + currentUser()?.lastName"
+      ></mat-card-title>
+      <mat-card-subtitle [textContent]="currentUser()?.email"></mat-card-subtitle>
+    </div>
+  </mat-card-header>
+</mat-card>
+
+<mat-accordion class="" multi>
+  <mat-expansion-panel class="border boder-2 shadow-none!" expanded>
+    <mat-expansion-panel-header>
+      <mat-panel-title> Brands </mat-panel-title>
+    </mat-expansion-panel-header>
+    <mat-selection-list class="max-h-52 overflow-scroll">
+      @for(brand of brands(); track brand.id){
+      <mat-list-option togglePosition="before">
+        <img matListItemAvatar src="https://material.angular.dev/assets/img/examples/shiba1.jpg" />
+        <span matListItemTitle>{{ brand.name }}</span>
+      </mat-list-option>
+      }
+    </mat-selection-list>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel class="border boder-2 shadow-none!" expanded>
+    <mat-expansion-panel-header>
+      <mat-panel-title> Categories</mat-panel-title>
+    </mat-expansion-panel-header>
+    <mat-selection-list class="max-h-52 overflow-scroll">
+      @for(category of categories(); track category.slug){
+      <mat-list-option togglePosition="before">
+        <img matListItemAvatar src="https://material.angular.dev/assets/img/examples/shiba1.jpg" />
+        <span matListItemTitle>{{ category.name }}</span>
+      </mat-list-option>
+      }
+    </mat-selection-list>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel class="border boder-2 shadow-none!" expanded>
+    <mat-expansion-panel-header>
+      <mat-panel-title> Price Range </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <mat-slider min="200" max="500" class="w-full!">
+      <input value="300" matSliderStartThumb />
+      <input value="400" matSliderEndThumb />
+    </mat-slider>
+    <div class="flex justify-between">
+      <span>{{ minPriceOfProduct() }}</span>
+      <span>{{ maxPriceOfProduct() }}</span>
+    </div>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel class="border boder-2 shadow-none!" expanded>
+    <mat-expansion-panel-header>
+      <mat-panel-title> Start Rating </mat-panel-title>
+    </mat-expansion-panel-header>
+    <div>Test 3</div>
+  </mat-expansion-panel>
+</mat-accordion>
