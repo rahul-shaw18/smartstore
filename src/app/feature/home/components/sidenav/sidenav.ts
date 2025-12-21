@@ -1,4 +1,4 @@
-import { Component, inject, input, OnInit, signal } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { User } from '../../../../shared/types/user-type';
 import { MatListModule } from '@angular/material/list';
 import { MatCard, MatCardTitle, MatCardSubtitle, MatCardHeader } from '@angular/material/card';

@@ -1,0 +1,23 @@
+<div class="grid grid-cols-3 gap-8 pl-14 pt-14 overflow-scroll">
+    @for(product of products(); track product.id) {
+    <mat-card class="shadow-none!" appearance="raised">
+      <mat-card-content>
+        <img mat-card-image [src]="product.thumbnail" alt="" />
+      </mat-card-content>
+      <mat-card-footer class="p-4">
+        <p class="text-lg font-bold">{{ product.title }}</p>
+        <div><b>Brand:</b> {{ product.brand }}</div>
+        <div class="flex gap-2">
+          <b>Price:</b> <span class="line-through">${{ product.price }}</span>
+          <span
+            >${{
+              (product.price - product.price * (product.discountPercentage / 100)).toFixed(2)
+            }}</span
+          >
+        </div>
+        <div><b>Rating:</b> {{ product.rating }}/5</div>
+        <div><b>Stock Left:</b> {{ product.stock }}</div>
+      </mat-card-footer>
+    </mat-card>
+    }
+  </div>
