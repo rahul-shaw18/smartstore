@@ -22,6 +22,9 @@
         },
         "@schematics/angular:resolver": {
           "skipTests": true
+        },
+        "@schematics/angular:pipe": {
+          "skipTests": true
         }
       },
       "root": "",

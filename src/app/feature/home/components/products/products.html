@@ -1,5 +1,9 @@
+<div>
+  <input class="border" type="text" [formControl]="inputControl">
+</div>
+
 <div class="grid grid-cols-3 gap-8 pl-14 pt-14 overflow-scroll">
-    @for(product of products(); track product.id) {
+    @for(product of products() | productFilter: searchTitle();track product.id) {
     <mat-card class="shadow-none!" appearance="raised">
       <mat-card-content>
         <img mat-card-image [src]="product.thumbnail" alt="" />
