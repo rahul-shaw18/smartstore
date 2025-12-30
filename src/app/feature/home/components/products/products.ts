@@ -22,7 +22,7 @@ export class Products implements OnInit {
   protected readonly products = this.homeService.products;
 
   inputControl = new FormControl('');
-  searchTitle = signal('');
+  protected searchTitle = signal('');
 
   ngOnInit(): void {
     this.inputControl.valueChanges.pipe(debounceTime(300)).subscribe((val) => {
